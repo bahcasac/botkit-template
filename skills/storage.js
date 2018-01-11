@@ -72,7 +72,7 @@ function showUserPreference(controller, bot, message, userId, color) {
 function askForFavoriteColor(controller, bot, message, userId) {
     bot.startConversation(message, function (err, convo) {
 
-        convo.ask("What is your favorite color?", [
+        convo.ask("Qual é a sua cor favorita?", [
             {
                 pattern: "^blue|green|pink|red|yellow$",
                 callback: function (response, convo) {
@@ -82,7 +82,7 @@ function askForFavoriteColor(controller, bot, message, userId) {
                     var userPreference = { id: userId, value: pickedColor };
                     controller.storage.users.save(userPreference, function (err) {
                         if (err) {
-                            convo.say(message, 'sorry, could not access storage, err: ' + err.message);
+                            convo.say(message, 'desculpe, não consegui acessar o storage, err: ' + err.message);
                             convo.next();
                             return;
                         }
@@ -95,7 +95,7 @@ function askForFavoriteColor(controller, bot, message, userId) {
             {
                 default: true,
                 callback: function (response, convo) {
-                    convo.say("Sorry, I don't know this color. Try another one...");
+                    convo.say("Desculpe, Eu não conheço esta cor. Tente outra...");
                     convo.repeat();
                     convo.next();
                 }
@@ -104,7 +104,7 @@ function askForFavoriteColor(controller, bot, message, userId) {
 
         // Success thread
         convo.addMessage(
-            "Cool, I love '{{responses.answer}}' too",
+            "Legal, Eu também amo '{{responses.answer}}'",
             "success");
     });
 }
