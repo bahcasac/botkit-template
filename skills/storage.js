@@ -9,8 +9,8 @@ module.exports = function (controller) {
         var userId = message.raw_message.actorId;
         controller.storage.users.get(userId, function (err, data) {
             if (err) {
-                bot.reply(message, 'could not access storage, err: ' + err.message, function (err, message) {
-                    bot.reply(message, 'sorry, I am not feeling well \uF613! try again later...');
+                bot.reply(message, 'não pude acessar o storage, err: ' + err.message, function (err, message) {
+                    bot.reply(message, 'desculpe, eu não estou me sentindo bem \uF613! tente mais uma vez...');
                 });
                 return;
             }
@@ -31,28 +31,28 @@ module.exports = function (controller) {
 function showUserPreference(controller, bot, message, userId, color) {
     bot.startConversation(message, function (err, convo) {
 
-        convo.sayFirst(`Hey, I know you <@personId:${userId}>!<br/> '${color}' is your favorite color.`);
+        convo.sayFirst(`Oi, Eu conheço você <@personId:${userId}>!<br/> '${color}' is your favorite color.`);
 
         // Remove user preferences if supported
         if (!controller.storage.users.remove) {
-            convo.say("_To erase your preference, simply restart the bot as you're using in-memory transient storage._");
+            convo.say("_Para apagar suas preferências, reinicie o bot_");
             convo.next();
             return;
         }
 
-        convo.ask("Should I erase your preference?  yes/(no)", [
+        convo.ask("Posso apagar suas preferências (sim/não)", [
             {
-                pattern: "^yes|ya|da|si|oui$",
+                pattern: "^sim|si|ai|si|oui$",
                 callback: function (response, convo) {
 
                     controller.storage.users.remove(userId, function (err) {
                         if (err) {
-                            convo.say(message, 'sorry, could not access storage, err: ' + err.message);
+                            convo.say(message, 'desculpe, eu não acessei seu storage, err: ' + err.message);
                             convo.repeat();
                             return;
                         }
 
-                        convo.say("Successfully reset your color preference.");
+                        convo.say("Removida sua cor com sucesso!");
                         convo.next();
                     });
 
@@ -61,7 +61,7 @@ function showUserPreference(controller, bot, message, userId, color) {
             {
                 default: true,
                 callback: function (response, convo) {
-                    convo.say("Got it, leaving your color preference as is.");
+                    convo.say("Remova sua preferência de cor");
                     convo.next();
                 }
             }
@@ -87,7 +87,7 @@ function askForFavoriteColor(controller, bot, message, userId) {
                             return;
                         }
 
-                        convo.transitionTo("success", `_stored user preference_`);
+                        convo.transitionTo("success", `_preferência armazenada_`);
                     });
 
                 },
@@ -104,7 +104,7 @@ function askForFavoriteColor(controller, bot, message, userId) {
 
         // Success thread
         convo.addMessage(
-            "Legal, Eu também amo '{{responses.answer}}'",
+            "Legal, Eu também gosto muito de '{{responses.answer}}'",
             "success");
     });
 }

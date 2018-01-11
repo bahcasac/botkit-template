@@ -14,7 +14,7 @@ module.exports = function (controller) {
 
         bot.startConversation(message, function (err, convo) {
 
-            convo.ask("Please choose a skill among 'color', 'restricted', 'show', 'storage', 'threads', 'variables', 'about', 'join', 'help'", [
+            convo.ask(" Por favor, escolha uma habilidade entre 'color', 'restricted', 'show', 'storage', 'threads', 'variables', 'about', 'join', 'help'", [
                 {
                     pattern: "^color|restricted|show|storage|threads|variables|about|join|help$",
                     callback: function (response, convo) {
@@ -28,7 +28,7 @@ module.exports = function (controller) {
                 {
                     default: true,
                     callback: function (response, convo) {
-                        convo.say("Sorry, this skill is not correct. Try again...");
+                        convo.say("Desculpe, esta habilidade, não existe. Tente novamente...");
                         convo.repeat();
                         convo.next();
                     }
@@ -46,7 +46,7 @@ function showSkill(skill, bot, message) {
     var normalizedPath = require("path").join(__dirname, skill_source);
     require("fs").readFile(normalizedPath, 'utf8', function (err, data) {
         if (err) {
-            bot.reply(message, "Could not find code for skill '" + skill + "'. Try again with another skill name...");
+            bot.reply(message, "Não foi possível encontrar essa habilidade '" + skill + "'.  Tente novamente, uma outra habilidade");
             return;
         }
 

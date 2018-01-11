@@ -15,7 +15,7 @@ module.exports = function (controller) {
                 {
                     default: true,
                     callback: function (response, convo) {
-                        convo.say("Sorry, I don't know this color. Try another one...");
+                        convo.say("Desculpe, Eu não conheço essa cor. Tente outra...");
                         convo.repeat();
                         convo.next();
                     }
