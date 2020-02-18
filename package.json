@@ -10,14 +10,22 @@
     "botkit",
     "devnet"
   ],
-  "author": "Stève Sfartz (Cisco DevNet) <stsfartz@cisco.com>",
+  "author": "Barbara Casac <bcasac@cisco.com> (Cisco DevNet)",
   "license": "MIT",
   "dependencies": {
-    "botkit": "0.6.0",
-    "node-env-file": "0.1.8"
+    "botkit": "^0.6.21",
+    "node-env-file": "^0.1.8"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CiscoDevNet/botkit-template.git"
+    "url": "git+https://github.com/CiscoDevNet/botkit-template.git"
+  },
+  "name": "botkit-template",
+  "bugs": {
+    "url": "https://github.com/CiscoDevNet/botkit-template/issues"
+  },
+  "homepage": "https://github.com/CiscoDevNet/botkit-template#readme",
+  "directories": {
+    "doc": "docs"
   }
 }
